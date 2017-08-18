@@ -4,5 +4,10 @@
 if fs and term then
 	return require "howl.platform.cc"
 else
-	return require "howl.platform.native"
+	local ok,err = pcall(function() return require("component").redstone end)
+	if not ok then
+		return require "howl.platform.native"
+	else
+		return require "howl.platform.oc"
+	end
 end
